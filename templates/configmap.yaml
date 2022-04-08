@@ -1,0 +1,13 @@
+{{- if .Values.cachetMonitor.config -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    {{- include "cachet-url-monitor.labels" . | nindent 4  }}
+  name: {{ include "cachet-url-monitor.fullname" . }}
+data:
+  config.yml: |
+{{- if .Values.cachetMonitor.config }}
+{{ .Values.cachetMonitor.config | indent 4 }}
+{{- end -}}
+{{- end -}}
